@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .flex-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            padding-top: 10px;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .p-5 {
+            padding: 12px;
+        }
+
+        .text-xl {
+            font-size: 20px;
+        }
+
+        .mb-3 {
+            margin-bottom: 12px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="flex-center mb-3">
+        <form method="POST" action="/print" autocomplete="off">
+            <input class="p-5 text-xl input" type="text" name="data" placeholder="Introduce">
+            <input id="submit" class="hidden" type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="simple-keyboard"></div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+<script>
+    const Keyboard = window.SimpleKeyboard.default;
+
+    let keyboard = new Keyboard({
+        onChange: input => onChange(input),
+        onKeyPress: button => onKeyPress(button),
+        layout: {
+            default: ["1 2 3", "4 5 6", "7 8 9", "{bksp} 0 {enter}"],
+        },
+        theme: "hg-theme-default hg-layout-numeric numeric-theme"
+    });
+
+    function onChange(input) {
+        document.querySelector(".input").value = input;
+    }
+
+    function onKeyPress(button) {
+        if (button === "{enter}") {
+            submitForm();
+        }
+    }
+
+    function submitForm() {
+        document.getElementById("submit").click();
+    }
+</script>
+
+
+</body>
+</html>
